@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TotAici — Oferte într-un singur loc</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f5f7;color:#171717}
+header{background:#111;color:#fff;padding:18px 5%;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:28px;font-weight:800}.tag{opacity:.75;font-size:14px}
+.hero{padding:55px 5%;background:#fff;text-align:center}
+.hero h1{font-size:42px;margin:0 0 10px}.hero p{font-size:18px;color:#666}
+.search{max-width:650px;margin:25px auto 0;display:flex;gap:8px}
+.search input{flex:1;padding:15px;border:1px solid #ccc;border-radius:10px;font-size:16px}
+.search button,.offer{border:0;border-radius:10px;padding:13px 18px;background:#111;color:#fff;cursor:pointer}
+main{max-width:1100px;margin:auto;padding:35px 20px}
+.categories{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+.cat{background:#fff;border:1px solid #ddd;border-radius:999px;padding:10px 16px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 4px 18px #0000000d}
+.icon{font-size:48px}.card h3{margin:12px 0 6px}.card p{color:#666;min-height:40px}
+.price{font-size:22px;font-weight:700;margin:12px 0}
+.note{margin-top:35px;padding:18px;background:#fff;border-radius:12px;color:#666}
+footer{text-align:center;padding:30px;color:#777}
+</style>
+</head>
+<body>
+<header><div class="logo">TotAici</div><div class="tag">Oferte. Simplu. La un loc.</div></header>
+<section class="hero">
+<h1>Găsești de toate. TotAici.</h1>
+<p>Compară produse și mergi direct la oferta magazinului partener.</p>
+<div class="search"><input id="q" placeholder="Caută telefon, haine, produse pentru casă..."><button onclick="filterProducts()">Caută</button></div>
+</section>
+<main>
+<h2>Categorii</h2>
+<div class="categories">
+<button class="cat" onclick="show('toate')">Toate</button>
+<button class="cat" onclick="show('Electronice')">📱 Electronice</button>
+<button class="cat" onclick="show('Haine')">👕 Haine</button>
+<button class="cat" onclick="show('Casă')">🏠 Casă</button>
+<button class="cat" onclick="show('Mâncare')">🍕 Mâncare</button>
+</div>
+<h2>Oferte</h2>
+<div class="grid" id="products"></div>
+<div class="note"><b>Versiune demonstrativă:</b> produsele sunt exemple. Pentru a câștiga comision, butoanele „Vezi oferta” vor fi înlocuite cu linkuri de afiliere aprobate de magazinele partenere.</div>
+</main>
+<footer>© 2026 TotAici</footer>
+<script>
+const data=[
+{name:"Smartphone",cat:"Electronice",icon:"📱",desc:"Vezi oferte de telefoane.",price:"de la 699 lei"},
+{name:"Căști wireless",cat:"Electronice",icon:"🎧",desc:"Compară modele și prețuri.",price:"de la 99 lei"},
+{name:"Hanorac",cat:"Haine",icon:"👕",desc:"Modele pentru toate stilurile.",price:"de la 79 lei"},
+{name:"Pantofi sport",cat:"Haine",icon:"👟",desc:"Oferte de la magazine partenere.",price:"de la 129 lei"},
+{name:"Aspirator",cat:"Casă",icon:"🏠",desc:"Produse utile pentru casă.",price:"de la 249 lei"},
+{name:"Pizza",cat:"Mâncare",icon:"🍕",desc:"Descoperă oferte de mâncare.",price:"de la 25 lei"}
+];
+function render(items){document.getElementById('products').innerHTML=items.map(x=>`<article class="card"><div class="icon">${x.icon}</div><h3>${x.name}</h3><p>${x.desc}</p><div class="price">${x.price}</div><button class="offer" onclick="alert('Aici conectăm linkul magazinului partener.')">Vezi oferta</button></article>`).join('')}
+function show(cat){render(cat==='toate'?data:data.filter(x=>x.cat===cat))}
+function filterProducts(){let q=document.getElementById('q').value.toLowerCase();render(data.filter(x=>(x.name+' '+x.cat).toLowerCase().includes(q)))}
+render(data);
+</script>
+</body></html>
